@@ -4,6 +4,7 @@ const fs = require('fs'); /* Essa função com parametro 'fs' permite manipular 
 const hostname = "127.0.0.1";
 const port = 3000;
 
+
 const server = http.createServer((require, response)=>{
     //Testando a inicialização do server
     // response.statusCode = 200;
@@ -19,6 +20,10 @@ const server = http.createServer((require, response)=>{
     }else{
         return response.end("Esse diretório não existe!");
     }
+
+        
+    // fs.unlink('test.txt',(err)=>{console.log('deletado')})  Deletando um arquivo
+    // fs.rename('test.txt',(err)=>{console.log('deletado')})  Renomeando um arquivo
 
 });
 
