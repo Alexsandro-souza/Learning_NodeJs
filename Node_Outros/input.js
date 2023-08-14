@@ -12,5 +12,6 @@ interfaceReadInput.question('Qual o seu nome?', function(name){
 
 interfaceReadInput.on('close', function(){
     console.log('tchau');
-    process.exit(0)
+    console.log('by');
+    process.exit(0);
 })
