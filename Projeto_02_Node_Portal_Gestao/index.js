@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const bodyParse = require('body-parser');
 const mongoose = require('mongoose');
+const post = require('./posts');
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -20,8 +21,9 @@ app.listen('3000',()=>{
 });
 
 //Conectando com o banco de dados mongo
+const dataBase = 'Estudo_DB';
 
-mongoose.connection( 'mongodb+srv://root:senhamongo1@cluster0.7tyxizl.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect( `mongodb+srv://root:senhamongo1@cluster0.7tyxizl.mongodb.net/${dataBase}?retryWrites=true&w=majority`,
     {useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
     console.log('Sucesso na conexão com o DB!')
 }).catch((err)=>{
@@ -33,10 +35,17 @@ mongoose.connection( 'mongodb+srv://root:senhamongo1@cluster0.7tyxizl.mongodb.ne
 
 //Criando rotas
 
-app.get('/',(req,res)=>{
+app.get('/',async (req,res)=>{
     
     if(req.query.search == null){
+        try{
+            const dataPost = await post.find({}).sort({_id: -1}).exec();
+            console.log(dataPost[0])
+        }catch(err){
+            console.log(err.message)
+        }  
         res.render('home',{});
+      
     }else{
         res.render('busca',{});
     }
