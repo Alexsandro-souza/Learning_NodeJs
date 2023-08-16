@@ -10,40 +10,18 @@
             <div class="center">
                 
                 <div style="width:100%;" class="mais-lidas">
-                    <h3>33 resultados</h3>
+                    <h3><%- contagem%> resultado</h3>
                     <div class="mais-lidas-noticias">
-                        <div class="mais-lida-noticia-single">
-                            <img src="/public/images/natureza_small.png" />
-                            <div class="texto-mais-lida-single">
-                                <h4>Natureza</h4>
-                                <p>A importância da floresta do ártico para a biodiversidade mundial. Qual o impacto o degelo na fauna e flora?</p>
-                                <a href="/encarar-o-surf">Saiba mais</a>
+                        <%for(let i = 0; i < post.length;i++){ %>
+                            <div class="mais-lida-noticia-single">
+                                <img src="<%-post[i].image%>" />
+                                <div class="texto-mais-lida-single">
+                                    <h4><%-post[i].titulo%></h4>
+                                    <p><%-post[i].conteudo%></p>
+                                    <a href="<%-post[i].slug%>">Saiba mais</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mais-lida-noticia-single">
-                            <img src="/public/images/natureza_small.png" />
-                            <div class="texto-mais-lida-single">
-                                <h4>Natureza</h4>
-                                <p>A importância da floresta do ártico para a biodiversidade mundial. Qual o impacto o degelo na fauna e flora?</p>
-                                <a href="/encarar-o-surf">Saiba mais</a>
-                            </div>
-                        </div>
-                        <div class="mais-lida-noticia-single">
-                            <img src="/public/images/natureza_small.png" />
-                            <div class="texto-mais-lida-single">
-                                <h4>Natureza</h4>
-                                <p>A importância da floresta do ártico para a biodiversidade mundial. Qual o impacto o degelo na fauna e flora?</p>
-                                <a href="/encarar-o-surf">Saiba mais</a>
-                            </div>
-                        </div>
-                        <div class="mais-lida-noticia-single">
-                            <img src="/public/images/natureza_small.png" />
-                            <div class="texto-mais-lida-single">
-                                <h4>Natureza</h4>
-                                <p>A importância da floresta do ártico para a biodiversidade mundial. Qual o impacto o degelo na fauna e flora?</p>
-                                <a href="/encarar-o-surf">Saiba mais</a>
-                            </div>
-                        </div>
+                        <%}%>
                     </div>
                 </div>
             </div>

@@ -35,22 +35,40 @@ mongoose.connect( `mongodb+srv://root:senhamongo1@cluster0.7tyxizl.mongodb.net/$
 
 //Criando rotas
 
-app.get('/',async (req,res)=>{
-    
-    if(req.query.search == null){
+app.get('/',async (req,res)=>{  
+
+    if(req.query.search == null){   
+        let dataPost;     
         try{
-            const dataPost = await post.find({}).sort({_id: -1}).exec();
-            console.log(dataPost[0])
+            const data = await post.find({}).sort({_id: -1}).exec();
+            dataPost = data.map((item)=>{
+                return{
+                    titulo: item.titulo,
+                    image: item.image,
+                    categoria: item.categoria,
+                    conteudo : item.conteudo ,
+                    descricaoCurta : item.conteudo.substring(0,150),
+                    slug: item.slug
+                }
+            })
+
         }catch(err){
             console.log(err.message)
         }  
-        res.render('home',{});
+        res.render('home',{post:dataPost});
       
     }else{
-        res.render('busca',{});
+        try {
+            const filteredData = await post.find({ titulo: { $regex: req.query.search, $options: 'i' } }).exec();
+            res.render('busca', { post: filteredData, contagem: filteredData.length  });
+        } catch (err) {
+            console.error(err.message);
+            res.render('busca', {});
+        }
+        
     }
   
-});
+}); 
 
 app.get('/:slug',(req,res)=>{
     //res.send(req.params.slug);

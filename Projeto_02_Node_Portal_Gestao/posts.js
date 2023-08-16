@@ -6,7 +6,9 @@ const postsSchema = new Schema({
     image: String,
     categoria: String,
     conteudo : String,
-    slug: String
+    slug: String,
+    autor: String,
+    views : Number,
 })
 
 const post = mongoose.model('Posts', postsSchema, 'noticias')
