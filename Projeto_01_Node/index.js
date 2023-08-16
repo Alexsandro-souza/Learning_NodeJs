@@ -1,5 +1,6 @@
 const express = require('express'); // Chamando express
-const path = require('path')
+const path = require('path');
+const bodyParse = require('body-parser');
 
 
 /*As linhas 3, 4 a 6 estou apenas criando o server em express*/
@@ -7,6 +8,8 @@ const app = express();
 app.listen('3000',()=>{
     console.log('server rodando...')
 })
+
+let tarefas = ['Arrumar quarto', 'Lavar louça', 'Lavar carro'];
 
 //Criando as rotas para haver o funcionanmento do projeto
 
@@ -23,10 +26,14 @@ app.set('view engine', 'html'); //
 app.use('/public', express.static(path.join(__dirname, 'public'))); //
 app.set('views', path.join(__dirname, '/views')); //
 
+// Adicionando body-parser para conseguir capturar informações do formulário
+app.use( bodyParse.json() );
+app.use(bodyParse.urlencoded({extended: true}));
 
 
 
-let tarefas = ['Arrumar quarto', 'Lavar louça', 'Lavar carro'];
+
+
 
 app.get('/deletar/:id',(require, response)=>{
     
@@ -37,4 +44,9 @@ app.get('/deletar/:id',(require, response)=>{
     })
     response.render('index',{tarefasLista : tarefas})
    
+})
+
+app.post('/',(require, response)=>{
+    tarefas.push(require.body.nova);
+    response.redirect('/'); // Após enviar a informação do formulário é necessário direcionar o usuário para algum lugar no caso o a tela inicial.
 })

@@ -8,9 +8,9 @@
 </head>
 <body>
     <div class="taferas">
-        <form>
+        <form method="post">
             <input type="text" name="nova">
-            <input type="submit" name="envia">
+            <input type="submit" name="envia" value="Add">
         </form>
         <% for( i = 0; i < tarefasLista.length; i++){%>
             <p><%= tarefasLista[i] %>
